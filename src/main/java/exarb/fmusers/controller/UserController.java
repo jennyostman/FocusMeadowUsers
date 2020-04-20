@@ -13,6 +13,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/users", produces = APPLICATION_JSON_VALUE)
 public class UserController {
 
+    // TODO: denna klass används inte
+
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -22,7 +24,7 @@ public class UserController {
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<User> createNewUser(@NotNull @RequestBody User user) {
         return ResponseEntity.ok().body(userService.createNewUser(user));
-
     }
+
 
 }
