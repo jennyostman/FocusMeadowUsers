@@ -21,10 +21,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(consumes = APPLICATION_JSON_VALUE)
+/*    @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<User> createNewUser(@NotNull @RequestBody User user) {
         return ResponseEntity.ok().body(userService.createNewUser(user));
-    }
+    }*/
 
 
 }

@@ -4,12 +4,12 @@ h4 {
 
 label {
     display: inline-block;
-    width: 200px;
+    width: 100px;
     margin: 5px;
     text-align: left;
 }
 
-input[type=text], input[type=password], select {
+input[type=text], input[type=password] {
     display: inline-block;
     width: 200px;
 }
