@@ -3,7 +3,7 @@ package exarb.fmusers.event;
 import java.io.Serializable;
 
 /**
- * This is a model for an event that is sent when a user stayed focused the whole time.
+ * This is a model for an event that is sent when a user has logged in successfully.
  */
 public class UserLoggedInEvent implements Serializable {
 

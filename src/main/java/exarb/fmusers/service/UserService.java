@@ -25,7 +25,11 @@ public class UserService {
         this.eventDispatcher = eventDispatcher;
     }
 
-
+    /**
+     * Saves a new user  if the username and the email does not already exist in the database.
+     * @param userWeb
+     * @return User
+     */
     public User createNewUser(UserWeb userWeb){
         User user = convertToUser(userWeb);
         if (userRepository.existsByEmail(user.getEmail())){
@@ -43,6 +47,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Method checks if the userName and the password matches.
+     * If they do, the user is logged in, and a UserLoggedInEvent message is sent.
+     * @param loginWeb
+     * @return
+     */
     public User logInUser(LoginWeb loginWeb){
         Optional<User> user = userRepository.findByUserName(loginWeb.getUserName());
         if (user.isPresent()){
@@ -64,6 +74,11 @@ public class UserService {
         }
     }
 
+    /**
+     * Converts a UserWeb object to a User object.
+     * @param web, object of UserWeb class.
+     * @return User
+     */
     private User convertToUser(UserWeb web){
         return new User(web.getFirstName(), web.getLastName(),
                 web.getUserName(), web.getEmail(), web.getPassword());

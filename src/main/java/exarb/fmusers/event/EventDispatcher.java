@@ -22,6 +22,11 @@ public class EventDispatcher {
         this.timerCountWorkRoutingKey = timerCountWorkRoutingKey;
     }
 
+    // TODO: Lägg till param i javadocs
+    /**
+     * Converts and sends the UserLoggedInEvent
+     * @param
+     */
     public void send(final TimerCountWorkEvent timerCountWorkEvent) {
         rabbitTemplate.convertAndSend(
                 timerCountExchange,

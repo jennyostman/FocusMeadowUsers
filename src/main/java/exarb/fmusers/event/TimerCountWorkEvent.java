@@ -2,7 +2,7 @@ package exarb.fmusers.event;
 
 import java.io.Serializable;
 
-// TODO: Synka med klass i gamelogic
+// TODO: Ta bort från user-service
 public class TimerCountWorkEvent implements Serializable {
 
     private String timerCountSessionId;
