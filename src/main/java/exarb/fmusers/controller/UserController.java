@@ -13,7 +13,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/users", produces = APPLICATION_JSON_VALUE)
 public class UserController {
 
-    // TODO: denna klass används inte
+    // TODO: denna klass används inte ännu
 
     private final UserService userService;
 

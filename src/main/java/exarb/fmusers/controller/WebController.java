@@ -30,10 +30,9 @@ public class WebController {
     @PostMapping("/login")
     // Vad ska ligga i ModelAttribute?!
     public String submitLoginForm(@ModelAttribute("user") LoginWeb loginWeb) {
-        System.out.println(loginWeb);
-
         User user = userService.logInUser(loginWeb);
-        System.out.println("user från db i controllern: " + user.toString());
+
+        // Här behöver vi nog skicka användaren vidare sedan?
 
         return "focusMeadow";
     }
@@ -48,9 +47,6 @@ public class WebController {
     @PostMapping("/register")
     public String submitRegistrationForm(@ModelAttribute("userWeb") UserWeb userWeb, Model model) {
         User user = userService.createNewUser(userWeb);
-
-        // Här behöver vi nog skicka användaren till frontenden sedan?
-        // I alla fall id:t.
 
         LoginWeb loginWeb = new LoginWeb();
         model.addAttribute("loginWeb", loginWeb);

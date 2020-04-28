@@ -1,5 +1,7 @@
 package exarb.fmusers.service;
 
+import exarb.fmusers.event.EventDispatcher;
+import exarb.fmusers.event.TimerCountWorkEvent;
 import exarb.fmusers.exception.RegistrationException;
 import exarb.fmusers.model.LoginWeb;
 import exarb.fmusers.model.User;
@@ -16,9 +18,11 @@ public class UserService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
+    private final EventDispatcher eventDispatcher;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, EventDispatcher eventDispatcher) {
         this.userRepository = userRepository;
+        this.eventDispatcher = eventDispatcher;
     }
 
 
@@ -43,8 +47,12 @@ public class UserService {
         Optional<User> user = userRepository.findByUserName(loginWeb.getUserName());
         if (user.isPresent()){
             if (loginWeb.getPassword().equals(user.get().getPassword())) {
+                eventDispatcher.send(
+                        new TimerCountWorkEvent(user.get().getId(),
+                                user.get().getUserName()));
                 return user.get();
             }
+
             else {
                 LOG.debug("Wrong password for {}", loginWeb.getUserName());
                 throw new RegistrationException("Wrong password");
