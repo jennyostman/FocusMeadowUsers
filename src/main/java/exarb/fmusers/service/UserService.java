@@ -57,9 +57,7 @@ public class UserService {
         Optional<User> user = userRepository.findByUserName(loginWeb.getUserName());
         if (user.isPresent()){
             if (loginWeb.getPassword().equals(user.get().getPassword())) {
-                eventDispatcher.send(
-                        new TimerCountWorkEvent(user.get().getId(),
-                                user.get().getUserName()));
+                eventDispatcher.send(new TimerCountWorkEvent(user.get().getId(), user.get().getUserName()));
                 return user.get();
             }
 
