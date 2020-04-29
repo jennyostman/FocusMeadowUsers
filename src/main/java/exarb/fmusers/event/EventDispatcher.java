@@ -10,16 +10,16 @@ public class EventDispatcher {
 
     private RabbitTemplate rabbitTemplate;
 
-    private String timerCountExchange;
-    private String timerCountWorkRoutingKey;
+    private String userExchange;
+    private String userLoggedInRoutingKey;
 
     @Autowired
     EventDispatcher(final RabbitTemplate rabbitTemplate,
-                    @Value("${timerCount.exchange}") final String timerCountExchange,
-                    @Value("${timerCount.work.key}") final String timerCountWorkRoutingKey) {
+                    @Value("${user.exchange}") final String userExchange,
+                    @Value("${user.logedin.key}") final String userLoggedInRoutingKey) {
         this.rabbitTemplate = rabbitTemplate;
-        this.timerCountExchange = timerCountExchange;
-        this.timerCountWorkRoutingKey = timerCountWorkRoutingKey;
+        this.userExchange = userExchange;
+        this.userLoggedInRoutingKey = userLoggedInRoutingKey;
     }
 
     // TODO: Lägg till param i javadocs
@@ -27,10 +27,10 @@ public class EventDispatcher {
      * Converts and sends the UserLoggedInEvent
      * @param
      */
-    public void send(final TimerCountWorkEvent timerCountWorkEvent) {
+    public void send(final UserLoggedInEvent userLoggedInEvent) {
         rabbitTemplate.convertAndSend(
-                timerCountExchange,
-                timerCountWorkRoutingKey,
-                timerCountWorkEvent);
+                userExchange,
+                userLoggedInRoutingKey,
+                userLoggedInEvent);
     }
 }

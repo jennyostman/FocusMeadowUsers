@@ -1,7 +1,7 @@
 package exarb.fmusers.service;
 
 import exarb.fmusers.event.EventDispatcher;
-import exarb.fmusers.event.TimerCountWorkEvent;
+import exarb.fmusers.event.UserLoggedInEvent;
 import exarb.fmusers.exception.RegistrationException;
 import exarb.fmusers.model.LoginWeb;
 import exarb.fmusers.model.User;
@@ -58,8 +58,7 @@ public class UserService {
         if (user.isPresent()){
             if (loginWeb.getPassword().equals(user.get().getPassword())) {
                 eventDispatcher.send(
-                        new TimerCountWorkEvent(user.get().getId(),
-                                user.get().getUserName()));
+                        new UserLoggedInEvent(user.get().getId()));
                 return user.get();
             }
 
