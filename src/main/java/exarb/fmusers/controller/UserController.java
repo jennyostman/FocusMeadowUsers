@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/users", produces = APPLICATION_JSON_VALUE)
 public class UserController {
-
-    // TODO: denna klass används inte ännu
 
     private final UserService userService;
 
@@ -26,5 +26,8 @@ public class UserController {
         return ResponseEntity.ok().body(userService.createNewUser(user));
     }*/
 
-
+    @GetMapping(value = "/user/{userId}")
+    public ResponseEntity<User> getEventsByGroup(@PathVariable String userId) {
+        return ResponseEntity.ok().body(userService.getUserById(userId));
+    }
 }
