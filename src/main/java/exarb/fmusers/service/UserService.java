@@ -82,4 +82,9 @@ public class UserService {
         return new User(web.getFirstName(), web.getLastName(),
                 web.getUserName(), web.getEmail(), web.getPassword());
     }
+
+    public User getUserById(String userId) {
+        User user = userRepository.getById(userId).get();
+        return user;
+    }
 }
