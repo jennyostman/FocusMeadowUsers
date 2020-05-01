@@ -27,7 +27,7 @@ public class UserController {
     }*/
 
     @GetMapping(value = "/user/{userId}")
-    public ResponseEntity<User> getEventsByGroup(@PathVariable String userId) {
+    public ResponseEntity<User> getUserById(@PathVariable String userId) {
         return ResponseEntity.ok().body(userService.getUserById(userId));
     }
 }
