@@ -7,20 +7,20 @@ import java.io.Serializable;
  */
 public class UserLoggedInEvent implements Serializable {
 
-    private Long userId;
+    private String userId;
 
-    public UserLoggedInEvent(Long userId) {
+    public UserLoggedInEvent(String userId) {
         this.userId = userId;
     }
 
     public UserLoggedInEvent() {
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }

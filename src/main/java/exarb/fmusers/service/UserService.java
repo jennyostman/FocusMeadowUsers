@@ -1,5 +1,7 @@
 package exarb.fmusers.service;
 
+import exarb.fmusers.event.EventDispatcher;
+import exarb.fmusers.event.UserLoggedInEvent;
 import exarb.fmusers.exception.RegistrationException;
 import exarb.fmusers.model.LoginWeb;
 import exarb.fmusers.model.User;
@@ -16,9 +18,11 @@ public class UserService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
+    private final EventDispatcher eventDispatcher;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, EventDispatcher eventDispatcher) {
         this.userRepository = userRepository;
+        this.eventDispatcher = eventDispatcher;
     }
 
     /**
@@ -53,7 +57,8 @@ public class UserService {
         Optional<User> user = userRepository.findByUserName(loginWeb.getUserName());
         if (user.isPresent()){
             if (loginWeb.getPassword().equals(user.get().getPassword())) {
-                // eventDispatcher.send(new TimerCountWorkEvent(user.get().getId(), user.get().getUserName()));
+                eventDispatcher.send(
+                        new UserLoggedInEvent(user.get().getId()));
                 return user.get();
             }
 
@@ -70,6 +75,11 @@ public class UserService {
         }
     }
 
+    public User getUserById(String userId) {
+        User user = userRepository.getById(userId).get();
+        return user;
+    }
+
     /**
      * Converts a UserWeb object to a User object.
      * @param web, object of UserWeb class.
@@ -79,4 +89,6 @@ public class UserService {
         return new User(web.getFirstName(), web.getLastName(),
                 web.getUserName(), web.getEmail(), web.getPassword());
     }
+
+
 }

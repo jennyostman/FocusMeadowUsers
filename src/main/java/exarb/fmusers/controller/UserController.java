@@ -11,6 +11,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.constraints.NotNull;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
@@ -44,4 +46,8 @@ public class UserController {
         }
     }
 
+    @GetMapping(value = "/user/{userId}")
+    public ResponseEntity<User> getEventsByGroup(@PathVariable String userId) {
+        return ResponseEntity.ok().body(userService.getUserById(userId));
+    }
 }
