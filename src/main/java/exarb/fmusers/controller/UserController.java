@@ -2,6 +2,7 @@ package exarb.fmusers.controller;
 
 import exarb.fmusers.exception.RegistrationException;
 import exarb.fmusers.model.LoginWeb;
+import exarb.fmusers.model.User;
 import exarb.fmusers.model.UserWeb;
 import exarb.fmusers.service.UserService;
 import org.springframework.http.HttpStatus;
