@@ -57,6 +57,7 @@ public class UserService {
         Optional<User> user = userRepository.findByUserName(loginWeb.getUserName());
         if (user.isPresent()){
             if (loginWeb.getPassword().equals(user.get().getPassword())) {
+                System.out.println("skickar event här");
                 eventDispatcher.send(
                         new UserLoggedInEvent(user.get().getId()));
                 return user.get();

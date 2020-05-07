@@ -16,7 +16,7 @@ public class EventDispatcher {
     @Autowired
     EventDispatcher(final RabbitTemplate rabbitTemplate,
                     @Value("${user.exchange}") final String userExchange,
-                    @Value("${user.logedin.key}") final String userLoggedInRoutingKey) {
+                    @Value("${user.loggedin.key}") final String userLoggedInRoutingKey) {
         this.rabbitTemplate = rabbitTemplate;
         this.userExchange = userExchange;
         this.userLoggedInRoutingKey = userLoggedInRoutingKey;
@@ -28,6 +28,7 @@ public class EventDispatcher {
      * @param
      */
     public void send(final UserLoggedInEvent userLoggedInEvent) {
+        System.out.println("event konverteras");
         rabbitTemplate.convertAndSend(
                 userExchange,
                 userLoggedInRoutingKey,
