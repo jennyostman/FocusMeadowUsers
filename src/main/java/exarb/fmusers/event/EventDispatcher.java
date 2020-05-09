@@ -22,16 +22,16 @@ public class EventDispatcher {
         this.userLoggedInRoutingKey = userLoggedInRoutingKey;
     }
 
-    // TODO: Lägg till param i javadocs
+
     /**
-     * Converts and sends the UserLoggedInEvent
-     * @param
+     * Converts and sends the UserRegisteredEvent
+     * @param userRegisteredEvent event message object for a registered user
      */
-    public void send(final UserLoggedInEvent userLoggedInEvent) {
+    public void send(final UserRegisteredEvent userRegisteredEvent) {
         System.out.println("event konverteras");
         rabbitTemplate.convertAndSend(
                 userExchange,
                 userLoggedInRoutingKey,
-                userLoggedInEvent);
+                userRegisteredEvent);
     }
 }
