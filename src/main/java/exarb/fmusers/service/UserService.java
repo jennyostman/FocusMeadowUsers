@@ -1,7 +1,8 @@
 package exarb.fmusers.service;
 
 import exarb.fmusers.event.EventDispatcher;
-import exarb.fmusers.event.UserLoggedInEvent;
+import exarb.fmusers.event.UserRegisteredEvent;
+import exarb.fmusers.exception.LoginException;
 import exarb.fmusers.exception.RegistrationException;
 import exarb.fmusers.model.LoginWeb;
 import exarb.fmusers.model.User;
@@ -43,13 +44,18 @@ public class UserService {
         else {
             User savedUser = userRepository.save(user);
             LOG.debug("Saved user to database with id: {}", savedUser.getId());
+
+            System.out.println("skickar event här");
+            eventDispatcher.send(
+                    new UserRegisteredEvent(savedUser.getId()));
+
             return savedUser;
         }
     }
 
     /**
      * Method checks if the userName and the password matches.
-     * If they do, the user is logged in, and a UserLoggedInEvent message is sent.
+     * If they do, the user is logged in, and a userRegisteredEvent message is sent.
      * @param loginWeb
      * @return
      */
@@ -57,28 +63,34 @@ public class UserService {
         Optional<User> user = userRepository.findByUserName(loginWeb.getUserName());
         if (user.isPresent()){
             if (loginWeb.getPassword().equals(user.get().getPassword())) {
-                System.out.println("skickar event här");
-                eventDispatcher.send(
-                        new UserLoggedInEvent(user.get().getId()));
                 return user.get();
             }
-
             else {
                 LOG.debug("Wrong password for {}", loginWeb.getUserName());
-                // throw new RegistrationException("Wrong password");
-                return null;
+                throw new LoginException("Wrong password");
+                // return null;
             }
         }
         else {
             LOG.debug("User {} does not exist", loginWeb.getUserName());
-            // throw new RegistrationException("User do not exist");
-            return null;
+            throw new LoginException("User do not exist");
+            // return null;
         }
     }
 
+
+    /**
+     * Gets a User object
+     * @param userId
+     * @return User
+     */
     public User getUserById(String userId) {
-        User user = userRepository.getById(userId).get();
-        return user;
+        Optional<User> user = userRepository.getById(userId);
+        if (user.isPresent()){
+            return user.get();
+        } else {
+            throw new LoginException("User do not exist");
+        }
     }
 
     /**
@@ -90,6 +102,5 @@ public class UserService {
         return new User(web.getFirstName(), web.getLastName(),
                 web.getUserName(), web.getEmail(), web.getPassword());
     }
-
 
 }
