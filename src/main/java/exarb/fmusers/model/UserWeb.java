@@ -2,9 +2,6 @@ package exarb.fmusers.model;
 
 import lombok.Data;
 
-/**
- * Model for a users web registration data
- */
 @Data
 public class UserWeb {
 

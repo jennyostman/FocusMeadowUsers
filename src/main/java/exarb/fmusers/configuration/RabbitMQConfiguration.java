@@ -26,7 +26,7 @@ public class RabbitMQConfiguration {
     /**
      * The default RabbitTemplate is overridden and replaced so
      * that it uses the JSON message converter
-     * @param connectionFactory factory for creating connections
+     * @param connectionFactory
      * @return RabbitTemplate
      */
     @Bean

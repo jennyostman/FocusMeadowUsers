@@ -27,8 +27,8 @@ public class UserService {
     }
 
     /**
-     * Saves a new user if the username and the email does not already exist in the database.
-     * @param userWeb user registration data
+     * Saves a new user  if the username and the email does not already exist in the database.
+     * @param userWeb
      * @return User
      */
     public User createNewUser(UserWeb userWeb){
@@ -56,8 +56,8 @@ public class UserService {
     /**
      * Method checks if the userName and the password matches.
      * If they do, the user is logged in, and a userRegisteredEvent message is sent.
-     * @param loginWeb user login data
-     * @return User
+     * @param loginWeb
+     * @return
      */
     public User logInUser(LoginWeb loginWeb){
         Optional<User> user = userRepository.findByUserName(loginWeb.getUserName());
@@ -81,7 +81,7 @@ public class UserService {
 
     /**
      * Gets a User object
-     * @param userId a users id
+     * @param userId
      * @return User
      */
     public User getUserById(String userId) {
@@ -95,7 +95,7 @@ public class UserService {
 
     /**
      * Converts a UserWeb object to a User object.
-     * @param web, users registration data
+     * @param web, object of UserWeb class.
      * @return User
      */
     private User convertToUser(UserWeb web){

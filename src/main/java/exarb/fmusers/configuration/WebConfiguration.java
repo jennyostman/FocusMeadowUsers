@@ -12,7 +12,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     /**
      * Enables Cross-Origin Resource Sharing (CORS)
      * More info: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cors.html
-     * @param registry class that assists with registration of CorsConfiguration mappings.
+     * @param registry
      */
     @Override
     public void addCorsMappings(final CorsRegistry registry) {
