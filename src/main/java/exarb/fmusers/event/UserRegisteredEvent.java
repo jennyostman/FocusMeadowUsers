@@ -3,7 +3,7 @@ package exarb.fmusers.event;
 import java.io.Serializable;
 
 /**
- * This is a model for an event that is sent when a user has logged in successfully.
+ * This is a model for an event that is sent when a user has registered successfully.
  */
 public class UserRegisteredEvent implements Serializable {
 

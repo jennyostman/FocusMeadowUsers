@@ -1,5 +1,9 @@
 package exarb.fmusers.model;
 
+
+/**
+ * Model for a users login data
+ */
 public class LoginWeb {
 
     private String userName;

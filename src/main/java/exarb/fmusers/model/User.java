@@ -2,6 +2,10 @@ package exarb.fmusers.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
+/**
+ * Model for a user
+ */
 @Document(collection = "users")
 public class User {
 
